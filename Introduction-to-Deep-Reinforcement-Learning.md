@@ -27,9 +27,12 @@ Unsupervised Learning | Unlabeled data | Underlying pattern | Clustering | Recom
 Reinforcement Learning | Learn from environment | Action to the enviroment | Exploration and Exploitation | Self driving cars; Gaming
 
 ## Reinforcement Learning
-As mensioned previously, reinforcement learning get feedback from interacting with the environment without having predefined data. It is a goal-oriented method that an agent tries to come up with the best action given a state.
+As mensioned previously, Reinforcement Learning get feedback from interacting with the environment without having predefined data. It is a goal-oriented method that an agent tries to come up with the best action given a state. One of the most important issue in Reinforcement Learning is the design of reward function, which influence how fast the agent will learn from the experience of interacting with the environment. 
 
+For example, an utimate goal for a dog (agent) is to catch a frisbee thrown by a kid. The closer the dog to the frisbee, the more reward it will get. This reward function will affect the dog's subsequent action. The dog will know where it is (state) and how much reward it gets in the previous action. All these result will be saved as the dog's experience for deciding the next action. The experience is saved as: input (state, action) -> output (Q-value)
 
+## Deep Reinforcement Learning
+In the previous example, 
 
 ## Reference
 Machine Learning Method: [Supervised vs. Unsupervised vs. Reinforcement](https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/) 
