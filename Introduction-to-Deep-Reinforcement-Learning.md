@@ -44,7 +44,11 @@ The experience learned from each state and action will be viewed as inputs to a 
 </p>
 
 ## Deep Reinforcement Learning (DRL)
-In Reinforcement Learning, the experience learned by the agent will be save to Q-table; however, when the action space or the state space is too large, Q-table will be ineffcient. 
+In Reinforcement Learning, the experience learned by the agent will be save to Q-table; however, when the action space or the state space is too large (for example: player games), Q-table will be ineffcient. To deal with this problem, Neural Networks method is used to approximate the Q-value for each action when given a state. 
+
+<p>
+<img src="./Image/Deep Q Learning.png" alt="Deep Q Learning" title="Deep Q Learning" width="500">
+</p>
 
 ## DRL Implementation
 
