@@ -11,6 +11,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 import gym
+import matplotlib.pyplot as plt
 
 class Net(nn.Module):
     def __init__(self, n_states, n_actions, n_hidden):
@@ -91,61 +92,81 @@ class DQN(object):
         self.learn_step_counter += 1
         if self.learn_step_counter % self.target_replace_iter == 0:
             self.target_net.load_state_dict(self.eval_net.state_dict())
-        
-env = gym.make('MountainCar-v0')
 
-# Environment parameters
-n_actions = env.action_space.n
-n_states = env.observation_space.shape[0]
-
-# Hyper parameters
-n_hidden = 20
-batch_size = 32
-lr = 0.01                 # learning rate
-epsilon = 0.1             # epsilon-greedy
-gamma = 0.9               # reward discount factor
-target_replace_iter = 100 # target network update frequency
-memory_capacity = 2000
-n_episodes = 200
-
-# create DQN
-dqn = DQN(n_states, n_actions, n_hidden, batch_size, lr, epsilon, gamma, target_replace_iter, memory_capacity)
-
-# train DQN
-for i_episode in range(n_episodes):
-    t = 0
-    rewards = 0
-    state = env.reset()
-    while True:
-        env.render()
-
-        # choose action
-        action = dqn.choose_action(state)
-        next_state, reward, done, info = env.step(action)
-        
-        # revise reward to accelerate training process
-        pos, vel = next_state
-        r1 = pos-0.5 # better to make the car closer to the flag
-        r2 = vel
-        reward = r1+r2
-        
-        # save experience
-        dqn.store_transition(state, action, reward, next_state)
-
-        # accelerate reward
-        rewards += reward
-
-        # train the model after having enough expereince
-        if dqn.memory_counter > memory_capacity:
-            dqn.learn()
-
-        # go to next state
-        state = next_state
-
-        if done:
-            print(f'{i_episode+1} Episode finished after {t+1} timesteps, total rewards {rewards}')
-            break
-
-        t += 1
-
-env.close()
+if __name__ == '__main__' :        
+    env = gym.make('MountainCar-v0')
+    
+    # Environment parameters
+    n_actions = env.action_space.n
+    n_states = env.observation_space.shape[0]
+    
+    # Hyper parameters
+    n_hidden = 20
+    batch_size = 32
+    lr = 0.01                 # learning rate
+    epsilon = 0.1             # epsilon-greedy
+    gamma = 0.9               # reward discount factor
+    target_replace_iter = 100 # target network update frequency
+    memory_capacity = 2000
+    n_episodes = 200
+    
+    # create DQN
+    dqn = DQN(n_states, n_actions, n_hidden, batch_size, lr, epsilon, gamma, target_replace_iter, memory_capacity)
+    pos_his, reward_his = [], []
+    
+    # train DQN
+    for i_episode in range(n_episodes):
+        t = 0
+        rewards = 0
+        best_pos = -1.2 # min position defined in 'MountainCar-v0'
+        state = env.reset()
+        while True:
+            env.render()
+    
+            # choose action
+            action = dqn.choose_action(state)
+            next_state, reward, done, info = env.step(action)
+            
+            # revise reward to accelerate training process
+            pos, vel = next_state
+            r1 = pos-0.5 # better to make the car closer to the flag
+            r2 = vel
+            reward = r1+r2
+            
+            # save experience
+            dqn.store_transition(state, action, reward, next_state)
+            
+            # record best position happened during steps
+            best_pos = pos if (pos > best_pos) else best_pos
+    
+            # accumulate reward
+            rewards += reward
+    
+            # train the model after having enough expereince
+            if dqn.memory_counter > memory_capacity:
+                dqn.learn()
+    
+            # go to next state
+            state = next_state
+    
+            if done:
+                pos_his.append(best_pos)
+                reward_his.append(rewards)
+                print(f'{i_episode+1} Episode finished after {t+1} timesteps, total rewards {rewards}')
+                break
+    
+            t += 1
+    
+    env.close()
+    
+    plt.figure()
+    plt.plot(pos_his)
+    plt.xlabel('Episode')
+    plt.ylabel('Best Car Position')
+    plt.title('Best Car Position in each Episode')
+    
+    plt.figure()
+    plt.plot(reward_his)
+    plt.xlabel('Episode')
+    plt.ylabel('Total Reward')
+    plt.title('Total Reward in each Episode')
