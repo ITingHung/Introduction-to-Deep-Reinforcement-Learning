@@ -55,15 +55,15 @@ In Q-Learning, the experience learned by the agent will be save to Q-table; howe
 ## DQL Implementation
 **Environment**
 Open AI Gym: MountainCar-v0
-Neural Network Structure: Pytorch
+Description from Gym: The agent (a car) is started at the bottom of a valley. For any given state the agent may choose to accelerate to the left, right or cease any acceleration.
 
 <p>
-<img src="./Image/Mountain Car.png" alt="Mountain Car" title="Mountain Car" width="500">
+<img src="./Image/Mountain Car.PNG" alt="Mountain Car" title="Mountain Car" width="500">
 </p>
 
-The agent (a car) is started at the bottom of a valley. For any given state the agent may choose to accelerate to the left, right or cease any acceleration.
 
-Import Module:
+
+Import Module: Pytorch is used for building neural network
 ```
 import torch
 import torch.nn as nn
@@ -74,6 +74,7 @@ import matplotlib.pyplot as plt
 ```
 
 Neural Network Structure:
+
 ```
 class Net(nn.Module):
     def __init__(self, n_states, n_actions, n_hidden):
@@ -173,7 +174,7 @@ class DQN(object):
             self.target_net.load_state_dict(self.eval_net.state_dict())
 
 ```
-Trainning: 
+Training: 
 ```
 if __name__ == '__main__' :        
     env = gym.make('MountainCar-v0')
