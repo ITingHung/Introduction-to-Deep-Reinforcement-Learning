@@ -1,4 +1,10 @@
-# Introduction to Deep Reinforment Learning
+# Introduction to Deep Reinforment Learning (DRL)
+**Table of Contents**
+- [Machine Learning Method](#Machine-Learning-Method)
+- [Reinforcement Learning](#Reinforcement-Learning)
+- [Deep Reinforcement Learning](#Deep-Reinforcement-Learning-DRL)
+- [DRL Implementation](#DRL-Implementation)
+- [Reference](#Reference)
 
 ## Machine Learning Method
 There are three typical types of machine leanring methods:
@@ -37,8 +43,10 @@ The experience learned from each state and action will be viewed as inputs to a 
 <img src="./Image/Q-table Mechanism.png" alt="Q-table Mechanism" title="Q-table Mechanism" width="500">
 </p>
 
-## Deep Reinforcement Learning
+## Deep Reinforcement Learning (DRL)
 In Reinforcement Learning, the experience learned by the agent will be save to Q-table; however, when the action space or the state space is too large, Q-table will be ineffcient. 
+
+## DRL Implementation
 
 ## Reference
 Machine Learning Method: [Supervised vs. Unsupervised vs. Reinforcement](https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/) 
