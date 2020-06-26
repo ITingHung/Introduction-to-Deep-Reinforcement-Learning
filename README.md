@@ -5,19 +5,19 @@ There are three typical types of machine leanring methods:
 1. Supervised Learning: given labeled data, train the model for predicting the correct result
 
 <p>
-<img src="./Image/Supervised Leanring.png" alt="Supervised Learning" title="Supervised Leanring" width="700">
+<img src="./Image/Supervised Learning.png" alt="Supervised Learning" title="Supervised Learning" width="700">
 </p>
 
 2. Unsupervised Learning: given unlabeled data, train the model to find underlying patterns between data
 
 <p>
-<img src="./Image/Unsupervised Leanring.png" alt="Unsupervised Learning" title="Unsupervised Leanring" width="700">
+<img src="./Image/Unsupervised Learning.png" alt="Unsupervised Learning" title="Unsupervised Learning" width="700">
 </p>
 
 3. Reinforcement Learning: get feedback (state and reward) from interacting with the environment, and adjust new action to the environment to get maximum expected reward. 
 
 <p>
-<img src="./Image/Reinforcement Leanring.png" alt="Reinforcement Learning" title="Reinforcement Leanring" width="700">
+<img src="./Image/Reinforcement Learning.png" alt="Reinforcement Learning" title="Reinforcement Learning" width="700">
 </p>
 
 Method Comparison | Input Data | Output Result | Types of Problem | Application
