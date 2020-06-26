@@ -54,14 +54,15 @@ In Q-Learning, the experience learned by the agent will be save to Q-table; howe
 
 ## DQL Implementation
 **Environment**
-Open AI Gym: MountainCar-v0
-Description from Gym: The agent (a car) is started at the bottom of a valley. For any given state the agent may choose to accelerate to the left, right or cease any acceleration.
+Open AI Gym: MountainCar-v0  
+Description: The agent (a car) is started at the bottom of a valley. For any given state the agent may choose to accelerate to the left, right or cease any acceleration.
 
 <p>
 <img src="./Image/Mountain Car.PNG" alt="Mountain Car" title="Mountain Car" width="500">
 </p>
 
 
+Code shown below is adjust from [Reinforcement Learning 進階篇：Deep Q-Learning](https://medium.com/pyladies-taiwan/reinforcement-learning-%E9%80%B2%E9%9A%8E%E7%AF%87-deep-q-learning-26b10935a745)
 
 Import Module: Pytorch is used for building neural network
 ```
@@ -174,7 +175,10 @@ class DQN(object):
             self.target_net.load_state_dict(self.eval_net.state_dict())
 
 ```
-Training: 
+[Reward given from gym] 
+Agent reached the flag (position = 0.5): 0
+Position of the agent is less than 0.5: -1
+Since the default reward setting is too simple, here I revise it to accelerate the training process.
 ```
 if __name__ == '__main__' :        
     env = gym.make('MountainCar-v0')
@@ -269,5 +273,5 @@ Result:
 ## Reference
 Machine Learning Method: [Supervised vs. Unsupervised vs. Reinforcement](https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/) 
 Reinforcement Learning: [Reinforcement Learning 健身房：OpenAI Gym](https://medium.com/pyladies-taiwan/reinforcement-learning-%E5%81%A5%E8%BA%AB%E6%88%BF-openai-gym-e2ad99311efc)
-Deep Reinforcement Learning: [Reinforcement Learning 進階篇：Deep Q-Learning](https://medium.com/pyladies-taiwan/reinforcement-learning-%E9%80%B2%E9%9A%8E%E7%AF%87-deep-q-learning-26b10935a745)
+Deep Q-Learning: [Reinforcement Learning 進階篇：Deep Q-Learning](https://medium.com/pyladies-taiwan/reinforcement-learning-%E9%80%B2%E9%9A%8E%E7%AF%87-deep-q-learning-26b10935a745)
 
