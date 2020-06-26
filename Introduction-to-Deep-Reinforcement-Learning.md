@@ -57,7 +57,7 @@ In Q-Learning, the experience learned by the agent will be save to Q-table; howe
 
 ## Example: DQL Implementation
 **Environment**  
-Open AI Gym: MountainCar-v0  
+OpenAI Gym: MountainCar-v0  
 Description: The agent (a car) is started at the bottom of a valley. For any given state the agent may choose to accelerate to the left, right or cease any acceleration.
 
 <p>
@@ -215,5 +215,7 @@ Notice that the reward functions are different in these two cases, we can't comp
 ## Reference
 Machine Learning Method: [Supervised vs. Unsupervised vs. Reinforcement](https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/)  
 Reinforcement Learning: [Reinforcement Learning 健身房：OpenAI Gym](https://medium.com/pyladies-taiwan/reinforcement-learning-%E5%81%A5%E8%BA%AB%E6%88%BF-openai-gym-e2ad99311efc)  
-Deep Q-Learning: [Reinforcement Learning 進階篇：Deep Q-Learning](https://medium.com/pyladies-taiwan/reinforcement-learning-%E9%80%B2%E9%9A%8E%E7%AF%87-deep-q-learning-26b10935a745)
+Deep Reinforcement Learning: [A Beginner's Guide to Deep Reinforcement Learning](https://pathmind.com/wiki/deep-reinforcement-learning)  
+Deep Q-Learning: [Reinforcement Learning 進階篇：Deep Q-Learning](https://medium.com/pyladies-taiwan/reinforcement-learning-%E9%80%B2%E9%9A%8E%E7%AF%87-deep-q-learning-26b10935a745)  
+OpenAI Gym: [MountainCarEnv](https://github.com/openai/gym/blob/master/gym/envs/classic_control/mountain_car.py)
 
