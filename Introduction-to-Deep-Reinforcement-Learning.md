@@ -53,15 +53,14 @@ In Q-Learning, the experience learned by the agent will be save to Q-table; howe
 </p>
 
 ## DQL Implementation
-**Environment**
+**Environment**  
 Open AI Gym: MountainCar-v0  
 Description: The agent (a car) is started at the bottom of a valley. For any given state the agent may choose to accelerate to the left, right or cease any acceleration.
 
 <p>
 <img src="./Image/Mountain Car.PNG" alt="Mountain Car" title="Mountain Car" width="500">
 </p>
-
-
+  
 Code shown below is adjust from [Reinforcement Learning 進階篇：Deep Q-Learning](https://medium.com/pyladies-taiwan/reinforcement-learning-%E9%80%B2%E9%9A%8E%E7%AF%87-deep-q-learning-26b10935a745)
 
 Import Module: Pytorch is used for building neural network
@@ -271,7 +270,7 @@ Result:
 </p>
 
 ## Reference
-Machine Learning Method: [Supervised vs. Unsupervised vs. Reinforcement](https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/) 
-Reinforcement Learning: [Reinforcement Learning 健身房：OpenAI Gym](https://medium.com/pyladies-taiwan/reinforcement-learning-%E5%81%A5%E8%BA%AB%E6%88%BF-openai-gym-e2ad99311efc)
+Machine Learning Method: [Supervised vs. Unsupervised vs. Reinforcement](https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/)  
+Reinforcement Learning: [Reinforcement Learning 健身房：OpenAI Gym](https://medium.com/pyladies-taiwan/reinforcement-learning-%E5%81%A5%E8%BA%AB%E6%88%BF-openai-gym-e2ad99311efc)  
 Deep Q-Learning: [Reinforcement Learning 進階篇：Deep Q-Learning](https://medium.com/pyladies-taiwan/reinforcement-learning-%E9%80%B2%E9%9A%8E%E7%AF%87-deep-q-learning-26b10935a745)
 
