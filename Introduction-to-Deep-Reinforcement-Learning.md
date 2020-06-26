@@ -1,13 +1,15 @@
 # Introduction to Deep Reinforment Learning (DRL)
 **Table of Contents**
-- [Machine Learning Method](#Machine-Learning-Method)
-- [Reinforcement Learning](#Reinforcement-Learning)
-    - [Q-Learning](#Q-Learning)
-- [Deep Q-Learning (DQL)](#Deep-Q-Learning-DQL)
-- [DQL Implementation](#DQL-Implementation)
+- [Background: Machine Learning Method](#Background-Machine-Learning-Method)
+- [Methodology](#Methodology)
+    - [Reinforcement Learning](#Reinforcement-Learning)
+        - [Q-Learning](#Q-Learning)
+    - [Deep Q-Learning (DQL)](#Deep-Q-Learning-DQL)
+- [Example: DQL Implementation](#Example-DQL-Implementation)
+- [Comment](#Comment)
 - [Reference](#Reference)
 
-## Machine Learning Method
+## Background: Machine Learning Method
 There are three typical types of machine leanring methods:
 1. Supervised Learning: given labeled data, train the model for predicting the correct result
 
@@ -33,26 +35,27 @@ Supervised Learning | Labeled data | Prediction result | Classification; Regress
 Unsupervised Learning | Unlabeled data | Underlying pattern | Clustering | Recommendation; Anomaly detection
 Reinforcement Learning | Learn from environment | Action to the enviroment | Exploration and Exploitation | Self driving cars; Gaming
 
-## Reinforcement Learning
+## Methodology
+### Reinforcement Learning
 As mensioned previously, Reinforcement Learning get feedback from interacting with the environment without having predefined data. It is a goal-oriented method that an agent tries to come up with the best action given a state. One of the most important issue in Reinforcement Learning is the design of reward function, which influence how fast the agent will learn from the experience of interacting with the environment. 
 
 For example, an utimate goal for a dog (agent) is to catch a frisbee thrown by a kid. The closer the dog to the frisbee, the more reward it will get. This reward function will affect the dog's subsequent action. The dog will know where it is (state) and how much reward it gets in the previous action. All these result will be saved as the dog's experience for deciding the next action.
 
-### Q-Learning
+#### Q-Learning
 Q-learning is a model-free Reinforcement Learning algorithm. In Reinforcement Learning, agent will learn from experience. In Q-Learning, each state and action are viewed as inputs to a Q-function which outputs a corresponding Q-value (Expected future reward). Besides, these expereinces will be saved to a Q-table as a reference for agent to decide a best action.
 
 <p>
 <img src="./Image/Q-table Mechanism.png" alt="Q-table Mechanism" title="Q-table Mechanism" width="500">
 </p>
 
-## Deep Q-Learning (DQL)
+### Deep Q-Learning (DQL)
 In Q-Learning, the experience learned by the agent will be save to Q-table; however, when the action space or the state space is too large (for example: player games), Q-table will be ineffcient. To deal with this problem, Neural Networks method is used to approximate the Q-value for each action when given a state. 
 
 <p>
 <img src="./Image/Deep Q Learning.png" alt="Deep Q Learning" title="Deep Q Learning" width="500">
 </p>
 
-## DQL Implementation
+## Example: DQL Implementation
 **Environment**  
 Open AI Gym: MountainCar-v0  
 Description: The agent (a car) is started at the bottom of a valley. For any given state the agent may choose to accelerate to the left, right or cease any acceleration.
@@ -91,6 +94,7 @@ class Net(nn.Module):
         return actions_value
 ```
 Deep Q-Network module (simple version):
+For more detail: [Deep Q-Learning](https://github.com/ITingHung/Introduction-to-Deep-Reinforcement-Learning/blob/master/Deep%20Q-learning.py)
 ```
 class DQN(object):
     def __init__(self):
@@ -105,79 +109,11 @@ class DQN(object):
     def learn(self):
     	# Update tatget network
 ```
-Deep Q-Network module (detail):
-```
-class DQN(object):
-    def __init__(self, n_states, n_actions, n_hidden, batch_size, lr, epsilon, gamma, target_replace_iter, memory_capacity):
-        self.eval_net, self.target_net = Net(n_states, n_actions, n_hidden), Net(n_states, n_actions, n_hidden)
 
-        self.memory = np.zeros((memory_capacity, n_states * 2 + 2)) # size of experience in each memory: state + next state + reward + action
-        self.optimizer = torch.optim.Adam(self.eval_net.parameters(), lr=lr)
-        self.loss_func = nn.MSELoss()
-        self.memory_counter = 0
-        self.learn_step_counter = 0 # define for updating target network
-
-        self.n_states = n_states
-        self.n_actions = n_actions
-        self.n_hidden = n_hidden
-        self.batch_size = batch_size
-        self.lr = lr
-        self.epsilon = epsilon
-        self.gamma = gamma
-        self.target_replace_iter = target_replace_iter
-        self.memory_capacity = memory_capacity
-        
-    def choose_action(self, state):
-        x = torch.unsqueeze(torch.FloatTensor(state), 0)
-    
-        # epsilon-greedy
-        if np.random.uniform() < self.epsilon: # random
-            action = np.random.randint(0, self.n_actions)
-        else: # make the best choice according to policy
-            actions_value = self.eval_net(x) # get the score from each action according to eval net
-            action = torch.max(actions_value, 1)[1].data.numpy()[0] # choose the action with highest score
-    
-        return action
-    
-    def store_transition(self, state, action, reward, next_state):
-        # pack experience
-        transition = np.hstack((state, [action, reward], next_state))
-    
-        # save into memory；old memory may be overlaped
-        index = self.memory_counter % self.memory_capacity
-        self.memory[index, :] = transition
-        self.memory_counter += 1
-        
-    def learn(self):
-        # random sample batch_size experience
-        sample_index = np.random.choice(self.memory_capacity, self.batch_size)
-        b_memory = self.memory[sample_index, :]
-        b_state = torch.FloatTensor(b_memory[:, :self.n_states])
-        b_action = torch.LongTensor(b_memory[:, self.n_states:self.n_states+1].astype(int))
-        b_reward = torch.FloatTensor(b_memory[:, self.n_states+1:self.n_states+2])
-        b_next_state = torch.FloatTensor(b_memory[:, -self.n_states:])
-    
-        # calculate eval net and target net, get loss function of Q value
-        q_eval = self.eval_net(b_state).gather(1, b_action) # calculate Q value according to eval net
-        q_next = self.target_net(b_next_state).detach() # detach (target net won't be trained)
-        q_target = b_reward + self.gamma * q_next.max(1)[0].view(self.batch_size, 1) # calculate Q value according to target net
-        loss = self.loss_func(q_eval, q_target)
-    
-        # Backpropagation
-        self.optimizer.zero_grad()
-        loss.backward()
-        self.optimizer.step()
-    
-        # every target_replace_iter, update target net (copy eval net to target net)
-        self.learn_step_counter += 1
-        if self.learn_step_counter % self.target_replace_iter == 0:
-            self.target_net.load_state_dict(self.eval_net.state_dict())
-
-```
+Since the default reward setting is too simple, I revise it to accelerate the training process.  
 [Reward given from gym]  
 Agent reached the flag (position = 0.5): 0  
-Position of the agent is less than 0.5: -1  
-Since the default reward setting is too simple, here I revise it to accelerate the training process.
+Position of the agent is less than 0.5: -1
 ```
 if __name__ == '__main__' :        
     env = gym.make('MountainCar-v0')
@@ -245,29 +181,17 @@ if __name__ == '__main__' :
             
     env.close()
  ```
-
-Plot the result:
-```
-plt.figure()
-plt.plot(pos_his)
-plt.xlabel('Episode')
-plt.ylabel('Best Car Position')
-plt.title('Best Car Position in each Episode')
-
-plt.figure()
-plt.plot(reward_his)
-plt.xlabel('Episode')
-plt.ylabel('Total Reward')
-plt.title('Total Reward in each Episode')
-```
-
-Result:
+ 
+Result Plots:
 <p>
 <img src="./Image/Best Car Position in each Episode.png" alt="Best Car Position in each Episode" title="Best Car Position in each Episode" width="500">
 </p>
 <p>
 <img src="./Image/Total Reward in each Episode.png" alt="Total Reward in each Episode" title="Total Reward in each Episode" width="500">
 </p>
+
+## Comment
+According to the result 
 
 ## Reference
 Machine Learning Method: [Supervised vs. Unsupervised vs. Reinforcement](https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/)  
