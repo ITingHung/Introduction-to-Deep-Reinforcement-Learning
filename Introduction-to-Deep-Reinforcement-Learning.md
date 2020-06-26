@@ -49,7 +49,7 @@ Q-learning is a model-free Reinforcement Learning algorithm. In Reinforcement Le
 </p>
 
 ### Deep Q-Learning (DQL)
-In Q-Learning, the experience learned by the agent will be save to Q-table; however, when the action space or the state space is too large (for example: player games), Q-table will be ineffcient. To deal with this problem, Neural Networks method is used to approximate the Q-value for each action when given a state. 
+In Q-Learning, the experience learned by the agent will be save to Q-table; however, when the problem scale is larger, Q-table will be ineffcient. Take playing games as an example, the action space and the state space are too large to handle. To deal with this problem, Neural Networks method is used to approximate the Q-value for each action when given a state. 
 
 <p>
 <img src="./Image/Deep Q Learning.png" alt="Deep Q Learning" title="Deep Q Learning" width="500">
@@ -209,7 +209,8 @@ Since there are only two values in reward space (-1; 0), the total reward in eac
 Notice that the reward functions are different in these two cases, we can't compare the value of their Total Reward.
 
 ## Comment
-According to the result in DQL Implementation, it is clear that the reward function has a great effect on agent's action. A better designed reward function will lead to better effiency that an agent learns from interacting with the environment.
+1. According to the result in DQL Implementation, it is clear that the reward function has a great effect on the agent's action. A better designed reward function will lead to better effiency for an agent to learn from the environment.
+2. In Deep Q-Learning, a neural network structure is used for dealing with large-scale problems. However, the model will become more complex which decrease its explanation. Besides, there are more hyper parameters needed to be tuned in the Deep Q-Network model.
 
 ## Reference
 Machine Learning Method: [Supervised vs. Unsupervised vs. Reinforcement](https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/)  
