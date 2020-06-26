@@ -111,9 +111,13 @@ class DQN(object):
 ```
 
 Since the default reward setting is too simple, I revise it to accelerate the training process.  
-[Reward given from gym]  
+- Default Reward  
 Agent reached the flag (position = 0.5): 0  
-Position of the agent is less than 0.5: -1
+Position of the agent is less than 0.5: -1  
+- Adjust Reward
+Distance between agent and the flag = pos-0.5 (negative)
+Velocity of the agent = vel (positive if the agent is toward to the flag)
+Reward = (pos-0.5)+vel
 ```
 if __name__ == '__main__' :        
     env = gym.make('MountainCar-v0')
@@ -183,15 +187,29 @@ if __name__ == '__main__' :
  ```
  
 Result Plots:
+- Default Reward
 <p>
-<img src="./Image/Best Car Position in each Episode.png" alt="Best Car Position in each Episode" title="Best Car Position in each Episode" width="500">
-</p>
-<p>
-<img src="./Image/Total Reward in each Episode.png" alt="Total Reward in each Episode" title="Total Reward in each Episode" width="500">
+<img src="./Image/(Default Reward) Best Car Position in each Episode.png" alt="(Default Reward) Best Car Position in each Episode" title="(Default Reward) Best Car Position in each Episode" width="500">
 </p>
 
+Since there are only two values in reward space (-1; 0), the total reward in each episode is the same if the car didn't achieve the flag.
+
+<p>
+<img src="./Image/(Default Reward) Total Reward in each Episode.png" alt="(Default Reward) Total Reward in each Episode" title="(Default Reward) Total Reward in each Episode" width="500">
+</p>
+
+- Adjusted Reward
+<p>
+<img src="./Image/(Adjusted Reward) Best Car Position in each Episode.png" alt="(Adjusted Reward) Best Car Position in each Episode" title="(Adjusted Reward) Best Car Position in each Episode" width="500">
+</p>
+<p>
+<img src="./Image/(Adjusted Reward) Total Reward in each Episode.png" alt="(Adjusted Reward) Total Reward in each Episode" title="(Adjusted Reward) Total Reward in each Episode" width="500">
+</p>
+
+Notice that the reward functions are different in these two cases, we can't compare the value of their Total Reward.
+
 ## Comment
-According to the result 
+According to the result in DQL Implementation, it is clear that the reward function has 
 
 ## Reference
 Machine Learning Method: [Supervised vs. Unsupervised vs. Reinforcement](https://www.aitude.com/supervised-vs-unsupervised-vs-reinforcement/)  
