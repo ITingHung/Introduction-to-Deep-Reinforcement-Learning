@@ -174,9 +174,9 @@ class DQN(object):
             self.target_net.load_state_dict(self.eval_net.state_dict())
 
 ```
-[Reward given from gym] 
-Agent reached the flag (position = 0.5): 0
-Position of the agent is less than 0.5: -1
+[Reward given from gym]  
+Agent reached the flag (position = 0.5): 0  
+Position of the agent is less than 0.5: -1  
 Since the default reward setting is too simple, here I revise it to accelerate the training process.
 ```
 if __name__ == '__main__' :        
