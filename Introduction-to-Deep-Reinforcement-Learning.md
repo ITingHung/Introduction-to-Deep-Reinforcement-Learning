@@ -11,7 +11,7 @@ There are three typical types of machine leanring methods:
 2. Unsupervised Learning: given unlabeled data, train the model to find underlying patterns between data
 
 <p>
-<img src="./Image/Unsupervised Learning.png" alt="Unsupervised Learning" title="Unsupervised Learning" width="500">
+<img src="./Image/Unsupervised Learning.png" alt="Unsupervised Learning" title="Unsupervised Learning" width="300">
 </p>
 
 3. Reinforcement Learning: get feedback (state and reward) from interacting with the environment, and adjust new action to the environment to get maximum expected reward. 
