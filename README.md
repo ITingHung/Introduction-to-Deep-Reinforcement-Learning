@@ -7,4 +7,4 @@ Link | Last updated
 ## :pushpin:Implementation with Pytorch in OpenAI Gym
 Link | Last updated
 :---:|:------------:
-[DQL Implementation](https://github.com/ITingHung/Introduction-to-Deep-Reinforcement-Learning/blob/master/Deep%20Reinforment%20learning.py) | 2020
+[DQL Implementation](https://github.com/ITingHung/Introduction-to-Deep-Reinforcement-Learning/blob/master/Deep%20Q-learning.py) | 2020
