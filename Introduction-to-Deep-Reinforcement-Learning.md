@@ -64,7 +64,7 @@ Description: The agent (a car) is started at the bottom of a valley. For any giv
 <img src="./Image/Mountain Car.PNG" alt="Mountain Car" title="Mountain Car" width="500">
 </p>
   
-Code shown below is adjust from [Reinforcement Learning 進階篇：Deep Q-Learning](https://medium.com/pyladies-taiwan/reinforcement-learning-%E9%80%B2%E9%9A%8E%E7%AF%87-deep-q-learning-26b10935a745)
+Code shown below is adjusted from [Reinforcement Learning 進階篇：Deep Q-Learning](https://medium.com/pyladies-taiwan/reinforcement-learning-%E9%80%B2%E9%9A%8E%E7%AF%87-deep-q-learning-26b10935a745)
 
 Import Module: Pytorch is used for building neural network
 ```
